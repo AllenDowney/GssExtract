@@ -1,4 +1,4 @@
-gss-extract
+GSSExtract
 ==============================
 
 Code for making extracts of GSS data

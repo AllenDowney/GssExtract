@@ -19,7 +19,7 @@ PYTHON_INTERPRETER = python
 requirements:
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
-	
+
 
 
 
@@ -30,24 +30,24 @@ clean:
 
 ## Lint using flake8 and black (use `make format` to do formatting)
 lint:
-	flake8 gss-extract
-	black --check --config pyproject.toml gss-extract
+	flake8 gss_extract
+	black --check --config pyproject.toml gss_extract
 
 
 ## Format source code with black
 format:
-	black --config pyproject.toml gss-extract
+	black --config pyproject.toml gss_extract
 
 
 
 
 ## Set up python interpreter environment
 create_environment:
-	
+
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
-	
+
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
-	
+
 
 
 
@@ -57,7 +57,7 @@ create_environment:
 
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) gss-extract/data/make_dataset.py
+	$(PYTHON_INTERPRETER) gss_extract/data/make_dataset.py
 
 #################################################################################
 # Self Documenting Commands                                                     #

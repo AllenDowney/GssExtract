@@ -4,6 +4,9 @@ flake8
 isort
 jupyter
 matplotlib
+nb_black
 numpy
 pandas
 pip
+scipy
+tables
