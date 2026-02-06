@@ -387,4 +387,47 @@ def expect(line, cell):
         get_ipython().run_cell("%tb")
 
 
+# =============================================================================
+# Logging Functions
+# =============================================================================
+
+
+def log_and_print(message, log_file=None):
+    """Write message to debug log and print to notebook.
+    
+    This function writes to a global `debug_log` file handle if available,
+    and also prints the message to the notebook output. This ensures
+    important results are captured in a log file for later reference.
+    
+    Args:
+        message: String message to log and print
+        log_file: Optional file handle to write to. If None, uses global debug_log.
+    
+    Usage:
+        # At beginning of notebook:
+        debug_log = open('tables/my_log.txt', 'w')
+        
+        # Throughout notebook:
+        log_and_print("Processing complete: 100 items")
+        log_and_print(f"Mean error: {error:.4f}")
+        
+        # At end of notebook:
+        debug_log.close()
+    """
+    if log_file is None:
+        # Try to get debug_log from the caller's global namespace
+        import inspect
+        frame = inspect.currentframe()
+        try:
+            caller_globals = frame.f_back.f_globals
+            log_file = caller_globals.get('debug_log', None)
+        finally:
+            del frame
+    
+    if log_file:
+        log_file.write(message + "\n")
+        log_file.flush()
+    
+    print(message)
+
 
